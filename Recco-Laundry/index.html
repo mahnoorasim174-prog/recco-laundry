@@ -1,0 +1,827 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RECCO — Premium Laundry &amp; Dry Cleaning</title>
+    <meta
+      name="description"
+      content="RECCO is a premium laundry and dry cleaning service offering pickup, cleaning, pressing and delivery for those who expect more from their wardrobe."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+  </head>
+  <body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- ============================= HEADER ============================= -->
+    <header class="site-header" id="siteHeader">
+      <div class="container">
+        <a href="index.html" class="brand">RECCO<span></span></a>
+
+        <nav class="main-nav">
+          <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#process">Process</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-actions">
+          <a
+            href="customer-login.html"
+            class="btn btn-ghost"
+            style="color: var(--white); border-color: rgba(255, 255, 255, 0.3)"
+            >Customer Login</a
+          >
+          <a href="#book" class="btn btn-primary magnetic">Book Pickup</a>
+          <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="drawer-actions">
+        <a
+          href="customer-login.html"
+          class="btn btn-outline-dark"
+          style="color: var(--white); border-color: rgba(255, 255, 255, 0.3)"
+          >Sign In</a
+        >
+        <a href="#book" class="btn btn-primary">Book Pickup</a>
+      </div>
+    </div>
+
+    <!-- ============================== HERO =============================== -->
+    <section class="hero" id="top">
+      <div class="hero-media">
+        <img
+          id="heroImg"
+         src="https://images.pexels.com/photos/2927523/pexels-photo-2927523.jpeg"
+alt="Luxury laundry and garment care"
+        />
+      </div>
+
+      <div class="hero-content">
+        <div class="container">
+          <div class="hero-copy" data-reveal>
+            <span class="hero-eyebrow">Est. Rahim Yar Khan · Est. 2016</span>
+            <h1>Care, pressed<br />into every <em>fold.</em></h1>
+            <p class="hero-sub">
+              RECCO collects, cleans and returns your garments the way a tailor
+              would treat them — by hand where it matters, and always on time.
+            </p>
+            <div class="hero-actions">
+              <a href="#book" class="btn btn-primary magnetic"
+                >Schedule Free Pickup</a
+              >
+              <a href="#process" class="hero-play">
+                <span class="hero-play-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                    <path d="M6 4L20 12L6 20V4Z" fill="white" />
+                  </svg>
+                </span>
+                Explore Our Process
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-card" data-reveal data-reveal-delay="2">
+            <div class="rating">
+              ★★★★★
+              <span style="color: rgba(255, 255, 255, 0.6); font-weight: 400"
+                >4.9 / 5</span
+              >
+            </div>
+            <p>
+              "They pressed my father's wedding suit for my own wedding. Not a
+              single crease survived — including in the collar, which is the
+              hardest part."
+            </p>
+            <div class="who">
+              <img
+                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&q=80"
+                alt="Portrait of Amara N."
+              />
+              <div>
+                <strong>Amara N.</strong>
+                <span>Customer since 2021</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-scroll">Scroll<span class="progress"></span></div>
+    </section>
+
+    <!-- ============================ MARQUEE ============================== -->
+    <div class="marquee">
+      <div class="marquee-track" id="marqueeTrack">
+        <span>Dry Cleaning</span>
+        <span>Wash &amp; Fold</span>
+        <span>Garment Pressing</span>
+        <span>Leather &amp; Suede</span>
+        <span>Bridal Gowns</span>
+        <span>Curtains &amp; Linens</span>
+        <span>Same-Day Express</span>
+      </div>
+    </div>
+
+    <!-- ============================ SERVICES ============================= -->
+    <section class="services" id="services">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">What we handle</span>
+          <h2>One wardrobe, every fabric, no exceptions.</h2>
+          <p>
+            From everyday shirts to the pieces you only wear once a year, each
+            garment is sorted, tagged and treated according to its own fibre —
+            never a blanket cycle.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-card feature" data-reveal>
+            <div class="feature-media">
+              <img
+                src="https://images.unsplash.com/photo-1489274495757-95c7c837b101?auto=format&fit=crop&w=1200&q=80"
+                alt="Dry cleaned garments hanging on a rail"
+              />
+            </div>
+            <div class="card-body">
+              <span class="tag">Signature Service</span>
+              <h3>Dry Cleaning &amp; Pressing</h3>
+              <p>
+                Suits, coats and silk that need a gentler solvent cycle and a
+                hand-finished press before they go back on the hanger.
+              </p>
+            </div>
+            <div class="card-arrow">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M7 17L17 7M17 7H8M17 7V16" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="service-card small" data-reveal data-reveal-delay="1">
+            <span class="tag">Everyday</span>
+            <h3>Wash &amp; Fold</h3>
+            <p>
+              Sorted by colour and fabric, washed at the right temperature,
+              folded to hotel standard.
+            </p>
+            <div class="card-arrow">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M7 17L17 7M17 7H8M17 7V16" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="service-card small" data-reveal data-reveal-delay="2">
+            <span class="tag">Delicate</span>
+            <h3>Leather &amp; Suede</h3>
+            <p>
+              Conditioned and restored by hand, with colour matching for scuffs
+              and worn edges.
+            </p>
+            <div class="card-arrow">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M7 17L17 7M17 7H8M17 7V16" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="service-card small" data-reveal>
+            <span class="tag">Occasion</span>
+            <h3>Bridal &amp; Formal Wear</h3>
+            <p>
+              Preserved boxing available for gowns, with acid-free tissue and a
+              viewing window.
+            </p>
+            <div class="card-arrow">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M7 17L17 7M17 7H8M17 7V16" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="service-card small" data-reveal data-reveal-delay="1">
+            <span class="tag">Home</span>
+            <h3>Curtains &amp; Linens</h3>
+            <p>
+              Collected on-site for large or awkward pieces — measured, cleaned
+              and rehung.
+            </p>
+            <div class="card-arrow">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M7 17L17 7M17 7H8M17 7V16" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="service-card small" data-reveal data-reveal-delay="2">
+            <span class="tag">Business</span>
+            <h3>Corporate Accounts</h3>
+            <p>
+              Weekly collection for offices, hotels and studios, billed on a
+              single monthly invoice.
+            </p>
+            <div class="card-arrow">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M7 17L17 7M17 7H8M17 7V16" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= PROCESS ============================== -->
+    <section class="process" id="process">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">The claim ticket</span>
+          <h2>Four stops between your closet and ours.</h2>
+          <p>
+            Every order is tracked against its own ticket number, the same one
+            printed on the tag stitched to your garment bag.
+          </p>
+        </div>
+
+        <div class="ticket-row">
+          <div class="ticket" data-reveal>
+            <div>
+              <svg
+                class="stub-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+              >
+                <path
+                  d="M20 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v2M4 8h16M4 8v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"
+                />
+                <path d="M9 12h6" />
+              </svg>
+              <span class="stub-no">01</span>
+              <h4>Book a Pickup</h4>
+            </div>
+            <p>
+              Choose a 30-minute window online or by phone. A driver arrives
+              with your ticket already printed.
+            </p>
+          </div>
+
+          <div class="ticket" data-reveal data-reveal-delay="1">
+            <div>
+              <svg
+                class="stub-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+              >
+                <path d="M4 4l1.5 4M4 4l16 2-2 14-9-1M5.5 8h13" />
+                <circle cx="9" cy="18" r="1.6" />
+              </svg>
+              <span class="stub-no">02</span>
+              <h4>Sort &amp; Clean</h4>
+            </div>
+            <p>
+              Garments are inspected, tagged to your ticket, and routed to the
+              correct cycle for their fibre.
+            </p>
+          </div>
+
+          <div class="ticket" data-reveal data-reveal-delay="2">
+            <div>
+              <svg
+                class="stub-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+              >
+                <path d="M4 20l6-16h4l6 16M7 14h10" />
+              </svg>
+              <span class="stub-no">03</span>
+              <h4>Press &amp; Inspect</h4>
+            </div>
+            <p>
+              A second pair of eyes checks every seam and button before the
+              garment is steamed and hung.
+            </p>
+          </div>
+
+          <div class="ticket" data-reveal data-reveal-delay="3">
+            <div>
+              <svg
+                class="stub-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+              >
+                <path d="M3 12h13l-3-3m3 3l-3 3" />
+                <path d="M16 6h2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-2" />
+              </svg>
+              <span class="stub-no">04</span>
+              <h4>Deliver Back</h4>
+            </div>
+            <p>
+              Returned within your chosen window, bagged and matched to your
+              original ticket number.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= PRICING ============================== -->
+    <section class="pricing" id="pricing">
+      <div class="container">
+        <div class="section-head center" data-reveal>
+          <span class="eyebrow">Simple pricing</span>
+          <h2>Priced per garment, not by the basket.</h2>
+          <p>
+            No hidden minimums. Pick a plan for regular loads, or pay as you go
+            for occasional pieces.
+          </p>
+        </div>
+
+        <div class="tag-row">
+          <div class="garment-tag" data-reveal>
+            <span class="tag-name">Pay As You Go</span>
+            <div class="tag-price">Rs 350<span> / garment</span></div>
+            <ul>
+              <li>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+                Free pickup &amp; delivery
+              </li>
+              <li>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+                48-hour turnaround
+              </li>
+              <li>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+                Wash, fold or press
+              </li>
+            </ul>
+            <a href="#book" class="btn btn-outline-dark">Schedule Pickup</a>
+          </div>
+
+          <div class="garment-tag highlight" data-reveal data-reveal-delay="1">
+            <span class="badge">Most Chosen</span>
+            <span class="tag-name">Household Monthly</span>
+            <div class="tag-price">Rs 6,500<span> / month</span></div>
+            <ul>
+              <li>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+                Up to 30 garments
+              </li>
+              <li>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+                Priority 24-hour service
+              </li>
+              <li>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+                Dedicated account driver
+              </li>
+            </ul>
+            <a href="#book" class="btn btn-primary">Schedule Pickup</a>
+          </div>
+
+          <div class="garment-tag" data-reveal data-reveal-delay="2">
+            <span class="tag-name">Business Account</span>
+            <div class="tag-price">Custom<span> / invoice</span></div>
+            <ul>
+              <li>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+                Weekly office collection
+              </li>
+              <li>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+                Single monthly invoice
+              </li>
+              <li>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+                Admin dashboard access
+              </li>
+            </ul>
+            <a href="admin-login.html" class="btn btn-outline-dark"
+              >Talk to Us</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== STATS ================================ -->
+    <section class="stats">
+      <div class="stats-media">
+        <img
+          src="https://images.pexels.com/photos/7679720/pexels-photo-7679720.jpeg"
+          alt="Rows of pressed shirts hanging in the RECCO facility"
+        />
+      </div>
+      <div class="container stats-content">
+        <div class="stats-grid">
+          <div class="stats-copy" data-reveal>
+            <span class="eyebrow" style="color: var(--yellow-deep)"
+              >Why RECCO</span
+            >
+            <h2 style="margin-top: 14px">
+              Built for people who notice the difference.
+            </h2>
+            <p>
+              Every driver, presser and quality checker on our floor has been
+              trained on the same fifty-point standard — whether it's your one
+              good suit or your entire week's laundry.
+            </p>
+          </div>
+          <div class="stats-cards" data-reveal data-reveal-delay="1">
+            <div class="stat-card">
+              <strong>9 yrs</strong><span>Serving the city</span>
+            </div>
+            <div class="stat-card">
+              <strong>40k+</strong><span>Garments handled monthly</span>
+            </div>
+            <div class="stat-card">
+              <strong>98%</strong><span>On-time delivery rate</span>
+            </div>
+            <div class="stat-card">
+              <strong>4.9★</strong><span>Average customer rating</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== TESTIMONIALS ============================ -->
+    <section class="testimonials" id="reviews">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">In their words</span>
+          <h2>Trusted with the clothes people actually care about.</h2>
+        </div>
+
+        <div class="quote-track" id="quoteTrack">
+          <div class="quote-card">
+            <div class="stars">★★★★★</div>
+            <p class="quote">
+              I switched after a hotel-quality press job on a linen shirt that
+              usually comes back from other places looking worse than when it
+              went in.
+            </p>
+            <div class="who">
+              <img
+                src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=crop&w=100&q=80"
+                alt="Portrait of Bilal H."
+              />
+              <div>
+                <strong>Bilal H.</strong><span>Monthly subscriber</span>
+              </div>
+            </div>
+          </div>
+          <div class="quote-card">
+            <div class="stars">★★★★★</div>
+            <p class="quote">
+              Our office sends four bags a week and the invoice has never once
+              needed correcting. The driver texts ten minutes before arrival.
+            </p>
+            <div class="who">
+              <img
+                src="https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&w=100&q=80"
+                alt="Portrait of Sara Q."
+              />
+              <div><strong>Sara Q.</strong><span>Business account</span></div>
+            </div>
+          </div>
+          <div class="quote-card">
+            <div class="stars">★★★★★</div>
+            <p class="quote">
+              They boxed my sister's wedding gown with tissue paper and a
+              viewing window, exactly like the tailor in Lahore had quoted
+              double for.
+            </p>
+            <div class="who">
+              <img
+                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&q=80"
+                alt="Portrait of Amara N."
+              />
+              <div>
+                <strong>Amara N.</strong><span>Bridal preservation</span>
+              </div>
+            </div>
+          </div>
+          <div class="quote-card">
+            <div class="stars">★★★★★</div>
+            <p class="quote">
+              Suede jacket had a rain stain I assumed was permanent. It came
+              back looking closer to new than I expected for the price.
+            </p>
+            <div class="who">
+              <img
+                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80"
+                alt="Portrait of Farhan K."
+              />
+              <div><strong>Farhan K.</strong><span>Pay as you go</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quote-nav">
+          <button id="quotePrev" aria-label="Previous review">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+          <button id="quoteNext" aria-label="Next review">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= CTA BANNER ============================ -->
+    <section id="book">
+      <div class="cta-banner" data-reveal>
+        <div class="cta-grid">
+          <h2>Your first pickup is on us this week.</h2>
+          <div class="cta-actions">
+            <a href="customer-login.html" class="btn btn-primary magnetic"
+              >Book Your Pickup</a
+            >
+            <a href="#contact" class="btn btn-ghost">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== FOOTER ================================ -->
+    <footer class="site-footer" id="contact">
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a href="index.html" class="brand">RECCO<span></span></a>
+            <p>
+              Premium laundry and dry cleaning, collected and delivered across
+              the city, since 2016.
+            </p>
+            <div class="footer-social">
+              <a href="#" aria-label="Instagram"
+                ><svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r="1" /></svg
+              ></a>
+              <a href="#" aria-label="Facebook"
+                ><svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path
+                    d="M15 8h2V4h-2a4 4 0 0 0-4 4v2H9v4h2v8h4v-8h2.5l.5-4H15V8z"
+                  /></svg
+              ></a>
+              <a href="#" aria-label="WhatsApp"
+                ><svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path d="M4 20l1.4-4.1A8 8 0 1 1 9 18.6L4 20z" /></svg
+              ></a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h5>Quick Links</h5>
+            <ul>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#pricing">Pricing</a></li>
+              <li><a href="#reviews">Reviews</a></li>
+              <li><a href="customer-login.html">Customer Login</a></li>
+              <li><a href="admin-login.html">Admin Login</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h5>Opening Hours</h5>
+            <ul>
+              <li class="hours-row">
+                <span>Mon – Fri</span><span>8am – 9pm</span>
+              </li>
+              <li class="hours-row">
+                <span>Saturday</span><span>9am – 8pm</span>
+              </li>
+              <li class="hours-row">
+                <span>Sunday</span><span>10am – 6pm</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-col footer-newsletter">
+            <h5>Stay in the Loop</h5>
+            <p style="font-size: 14px">
+              Seasonal care tips and the odd discount. No spam, ever.
+            </p>
+            <form id="newsletterForm">
+              <input
+                type="email"
+                required
+                placeholder="Your email address"
+                aria-label="Email address"
+              />
+              <button type="submit">Join</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="footer-note">
+          <span>© 2026 RECCO Laundry Co. All rights reserved.</span>
+          <div class="footer-legal">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

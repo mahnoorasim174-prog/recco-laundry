@@ -1,0 +1,647 @@
+/* ==========================================================================
+   RECCO — login.css
+   Split-screen authentication layout for Customer and Admin login.
+   Reuses design tokens (colours, fonts, radius, shadows, easing) defined
+   in style.css. No new colours or fonts are introduced here.
+   ========================================================================== */
+
+/* ==========================================================================
+   Body reset for auth pages
+   ========================================================================== */
+
+body.auth-body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--ink);
+  font-family: var(--font-body);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   Back to home
+   ========================================================================== */
+
+.auth-back {
+  position: fixed;
+  top: 28px;
+  left: 28px;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: var(--radius-pill);
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  font-weight: 600;
+  box-shadow: var(--shadow-float);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.auth-back:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.auth-back--dark {
+  background: rgba(255, 255, 255, .08);
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, .18);
+  backdrop-filter: blur(12px);
+  box-shadow: none;
+}
+
+.auth-back--dark:hover {
+  background: rgba(255, 255, 255, .14);
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   Shell — split screen grid
+   ========================================================================== */
+
+.auth-shell {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  min-height: 100vh;
+}
+
+/* ==========================================================================
+   Left — visual panel
+   ========================================================================== */
+
+.auth-visual {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.auth-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+}
+
+.auth-visual-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(200deg, rgba(11, 11, 12, .35) 10%, rgba(11, 11, 12, .94) 92%);
+}
+
+.auth-visual-scrim--admin {
+  background: linear-gradient(200deg, rgba(11, 11, 12, .55) 10%, rgba(11, 11, 12, .97) 92%);
+}
+
+.auth-visual-glow {
+  position: absolute;
+  border-radius: var(--radius-full);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.auth-visual-glow--1 {
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, rgba(242, 194, 48, .35), transparent 70%);
+  top: -120px;
+  right: -100px;
+}
+
+.auth-visual-glow--2 {
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(242, 194, 48, .18), transparent 70%);
+  bottom: 10%;
+  left: -80px;
+}
+
+/* Floating ticket card, echoing the hero's floating info cards */
+.auth-ticket-card {
+  position: absolute;
+  top: 56px;
+  right: 56px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px 22px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .18);
+  backdrop-filter: blur(18px) saturate(160%);
+  color: var(--white);
+  font-family: var(--font-display);
+  animation: authFloat 6s ease-in-out infinite;
+}
+
+@keyframes authFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.auth-ticket-label {
+  font-size: 10.5px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--yellow);
+}
+
+.auth-ticket-value {
+  font-size: 20px;
+}
+
+.auth-ticket-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, .72);
+  margin-top: 2px;
+}
+
+.auth-ticket-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-full);
+  background: var(--yellow);
+  box-shadow: 0 0 0 4px rgba(242, 194, 48, .18);
+}
+
+.auth-visual-copy {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 56px;
+}
+
+.auth-visual-copy .brand {
+  color: var(--white);
+  margin-bottom: 32px;
+}
+
+.auth-visual-copy h2 {
+  font-family: var(--font-display);
+  color: var(--white);
+  font-size: clamp(26px, 2.6vw, 36px);
+  line-height: 1.18;
+  max-width: 14ch;
+}
+
+.auth-visual-copy p {
+  margin-top: 16px;
+  color: rgba(255, 255, 255, .68);
+  font-size: 14.5px;
+  line-height: 1.7;
+  max-width: 38ch;
+}
+
+/* ==========================================================================
+   Right — form panel
+   ========================================================================== */
+
+.auth-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(28px, 6vw, 64px);
+  background: var(--fog);
+}
+
+.auth-panel--admin {
+  background: var(--ink);
+}
+
+/* Glassmorphism card */
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  padding: clamp(32px, 4vw, 44px);
+  border-radius: var(--radius-xl);
+  background: rgba(255, 255, 255, .7);
+  border: 1px solid rgba(255, 255, 255, .6);
+  backdrop-filter: blur(22px) saturate(160%);
+  box-shadow: var(--shadow-card-hover);
+  animation: authCardIn .7s var(--ease-out) both;
+}
+
+.auth-card--admin {
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .14);
+  box-shadow: 0 30px 70px -30px rgba(0, 0, 0, .6);
+}
+
+@keyframes authCardIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Subtle shake animation for invalid submission */
+.auth-card.is-shaking {
+  animation: authShake .5s var(--ease-soft);
+}
+
+@keyframes authShake {
+  10%, 90% { transform: translateX(-2px); }
+  20%, 80% { transform: translateX(4px); }
+  30%, 50%, 70% { transform: translateX(-8px); }
+  40%, 60% { transform: translateX(8px); }
+}
+
+.auth-admin-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-lg);
+  background: rgba(242, 194, 48, .12);
+  color: var(--yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.auth-eyebrow {
+  margin-bottom: 14px;
+}
+
+.auth-eyebrow--admin {
+  color: var(--ash-light);
+}
+
+.auth-eyebrow--admin::before {
+  background: var(--yellow);
+}
+
+.auth-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 34px);
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.auth-title--admin {
+  color: var(--white);
+}
+
+.auth-subtitle {
+  margin-top: 12px;
+  color: var(--ash);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+.auth-subtitle--admin {
+  color: var(--ash-light);
+}
+
+/* ==========================================================================
+   Inline alert (shown on failed login)
+   ========================================================================== */
+
+.auth-alert {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  margin-top: 22px;
+  padding: 13px 16px;
+  border-radius: var(--radius-md);
+  background: rgba(179, 64, 31, .1);
+  border: 1px solid rgba(179, 64, 31, .25);
+  color: #b3401f;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.auth-alert.is-visible {
+  display: flex;
+  animation: authAlertIn .35s var(--ease-out);
+}
+
+@keyframes authAlertIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   Form fields
+   ========================================================================== */
+
+.auth-form {
+  margin-top: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.field-label--admin {
+  color: var(--ash-light);
+}
+
+.field-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.field-icon {
+  position: absolute;
+  left: 16px;
+  color: var(--ash);
+  pointer-events: none;
+}
+
+.field-input input {
+  width: 100%;
+  padding: 15px 46px 15px 46px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line-light);
+  background: var(--white);
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  color: var(--ink);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+}
+
+.field-input input:focus {
+  outline: none;
+  border-color: var(--yellow-deep);
+  box-shadow: 0 0 0 4px rgba(242, 194, 48, .16);
+}
+
+.field-input--admin input {
+  background: rgba(255, 255, 255, .05);
+  border-color: rgba(255, 255, 255, .16);
+  color: var(--white);
+}
+
+.field-input--admin input::placeholder {
+  color: var(--ash-light);
+}
+
+.field-input--admin input:focus {
+  border-color: var(--yellow);
+  box-shadow: 0 0 0 4px rgba(242, 194, 48, .12);
+}
+
+.field-toggle {
+  position: absolute;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ash);
+  transition: color var(--transition-fast);
+}
+
+.field-toggle:hover { color: var(--ink); }
+.field-toggle--admin:hover { color: var(--white); }
+
+.field-toggle.is-active { color: var(--yellow-deep); }
+.field-toggle--admin.is-active { color: var(--yellow); }
+
+.field-error {
+  display: none;
+  font-size: 12.5px;
+  color: #b3401f;
+}
+
+.field.has-error .field-input input {
+  border-color: #b3401f;
+}
+
+.field.has-error .field-input input:focus {
+  box-shadow: 0 0 0 4px rgba(179, 64, 31, .14);
+}
+
+.field.has-error .field-error {
+  display: block;
+}
+
+/* ==========================================================================
+   Remember me / forgot password row
+   ========================================================================== */
+
+.auth-form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.auth-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13.5px;
+  color: var(--ash);
+  cursor: pointer;
+  user-select: none;
+}
+
+.auth-checkbox--admin { color: var(--ash-light); }
+
+.auth-checkbox input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.auth-checkbox-box {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  border: 1.5px solid var(--line-light);
+  background: var(--white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.auth-checkbox--admin .auth-checkbox-box {
+  background: transparent;
+  border-color: rgba(255, 255, 255, .3);
+}
+
+.auth-checkbox-box::after {
+  content: '';
+  width: 9px;
+  height: 5px;
+  border-left: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  transform: rotate(-45deg) scale(0);
+  transition: transform .2s var(--ease-out);
+  margin-top: -2px;
+}
+
+.auth-checkbox input:checked + .auth-checkbox-box {
+  background: var(--yellow);
+  border-color: var(--yellow);
+}
+
+.auth-checkbox input:checked + .auth-checkbox-box::after {
+  transform: rotate(-45deg) scale(1);
+}
+
+.auth-forgot {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+  transition: color var(--transition-fast);
+}
+
+.auth-forgot:hover { color: var(--yellow-deep); }
+
+.auth-forgot--admin { color: var(--white); }
+.auth-forgot--admin:hover { color: var(--yellow); }
+
+/* ==========================================================================
+   Submit button with loading state
+   ========================================================================== */
+
+.auth-submit {
+  position: relative;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.auth-submit .auth-spinner {
+  display: none;
+  width: 17px;
+  height: 17px;
+  border-radius: var(--radius-full);
+  border: 2px solid rgba(11, 11, 12, .25);
+  border-top-color: var(--ink);
+  animation: authSpin .7s linear infinite;
+}
+
+.auth-submit.is-loading .auth-submit-label { opacity: 0; }
+.auth-submit.is-loading .auth-spinner {
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.auth-submit.is-loading { pointer-events: none; }
+
+@keyframes authSpin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.auth-hint {
+  margin-top: 2px;
+  font-size: 12.5px;
+  color: var(--ash);
+  text-align: center;
+}
+
+.auth-hint--admin { color: var(--ash-light); }
+.auth-hint strong { color: var(--ink); }
+.auth-hint--admin strong { color: var(--white); }
+
+/* ==========================================================================
+   Switch link (customer <-> admin)
+   ========================================================================== */
+
+.auth-switch {
+  margin-top: 26px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--ash);
+}
+
+.auth-switch a {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.auth-switch a:hover { color: var(--yellow-deep); }
+
+.auth-switch--admin { color: var(--ash-light); }
+.auth-switch--admin a { color: var(--white); }
+.auth-switch--admin a:hover { color: var(--yellow); }
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 980px) {
+  .auth-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-visual {
+    min-height: 320px;
+  }
+
+  .auth-visual-copy {
+    padding: 32px;
+  }
+
+  .auth-visual-copy p {
+    display: none;
+  }
+
+  .auth-ticket-card {
+    top: auto;
+    bottom: 24px;
+    right: 24px;
+    padding: 14px 18px;
+  }
+
+  .auth-back {
+    position: static;
+    margin: 20px 20px 0;
+    width: fit-content;
+  }
+}
+
+@media (max-width: 560px) {
+  .auth-panel {
+    padding: 24px 18px 48px;
+  }
+
+  .auth-card {
+    padding: 28px 22px;
+    border-radius: var(--radius-lg);
+  }
+
+  .auth-visual-copy {
+    padding: 24px;
+  }
+
+  .auth-visual-copy h2 {
+    font-size: 24px;
+  }
+
+  .auth-ticket-card {
+    right: 18px;
+    bottom: 18px;
+    padding: 12px 16px;
+  }
+}

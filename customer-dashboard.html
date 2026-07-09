@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Account — RECCO</title>
+  <meta name="description" content="Manage your RECCO orders, track deliveries, and update your account.">
+  <meta name="theme-color" content="#0b0b0c">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/customer-dashboard.css">
+
+  <link rel="icon" href="images/favicon.png" type="image/png">
+</head>
+<body class="dash-body">
+
+  <div class="dash-overlay" id="dashOverlay"></div>
+
+  <!-- ============================================================
+       SIDEBAR
+  ============================================================= -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <a href="index.html" class="brand dash-brand">
+      <span class="brand-mark"></span>
+      <span class="brand-name">RECCO</span>
+    </a>
+
+    <nav class="dash-nav" aria-label="Dashboard navigation">
+      <a href="#overview" class="dash-nav-link is-active" data-panel="overview">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        Dashboard
+      </a>
+      <a href="#orders" class="dash-nav-link" data-panel="orders">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v2M4 8h16M4 8v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/></svg>
+        My Orders
+      </a>
+      <a href="#tracking" class="dash-nav-link" data-panel="tracking">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
+        Track Order
+      </a>
+      <a href="#payments" class="dash-nav-link" data-panel="payments">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        Payment History
+      </a>
+      <a href="#addresses" class="dash-nav-link" data-panel="addresses">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+        Addresses
+      </a>
+      <a href="#notifications" class="dash-nav-link" data-panel="notifications">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+        Notifications
+        <span class="dash-nav-badge" id="notifBadge">3</span>
+      </a>
+      <a href="#support" class="dash-nav-link" data-panel="support">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2-3 4"/><path d="M12 17h.01"/></svg>
+        Support
+      </a>
+    </nav>
+
+    <div class="dash-sidebar-footer">
+      <a href="index.html" class="dash-nav-link" id="logoutBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg>
+        Logout
+      </a>
+    </div>
+  </aside>
+
+  <!-- ============================================================
+       MAIN
+  ============================================================= -->
+  <main class="dash-main">
+
+    <!-- Top bar -->
+    <header class="dash-topbar">
+      <button class="dash-mobile-toggle" id="dashToggle" aria-label="Open menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+
+      <div class="dash-search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" placeholder="Search orders, tickets..." aria-label="Search">
+      </div>
+
+      <div class="dash-topbar-actions">
+        <button class="dash-icon-btn" id="notifToggle" aria-label="Notifications" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+          <span class="dash-icon-dot"></span>
+        </button>
+
+        <div class="dash-notif-panel" id="notifPanel">
+          <div class="dash-notif-head">
+            <h4>Notifications</h4>
+            <span>3 new</span>
+          </div>
+          <ul class="dash-notif-list">
+            <li class="dash-notif-item is-unread">
+              <span class="dash-notif-icon dash-notif-icon--info">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+              </span>
+              <div>
+                <p>Pickup scheduled for tomorrow, 9 – 11 AM.</p>
+                <span>2 hours ago</span>
+              </div>
+            </li>
+            <li class="dash-notif-item is-unread">
+              <span class="dash-notif-icon dash-notif-icon--success">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              </span>
+              <div>
+                <p>Order RC-04498 has been completed.</p>
+                <span>Yesterday</span>
+              </div>
+            </li>
+            <li class="dash-notif-item is-unread">
+              <span class="dash-notif-icon dash-notif-icon--offer">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.9 6.3L21 9.3l-4.5 4.4 1 6.3L12 17l-5.5 3 1-6.3L3 9.3l6.1-1z"/></svg>
+              </span>
+              <div>
+                <p>15% off your next Dry Cleaning order.</p>
+                <span>2 days ago</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <button class="dash-profile-btn" id="profileToggle" aria-label="Profile menu" aria-expanded="false">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" alt="">
+          <span class="dash-profile-name">Ali</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+
+        <div class="dash-profile-menu" id="profileMenu">
+          <a href="#overview">View Profile</a>
+          <a href="#payments">Payment History</a>
+          <a href="#support">Support</a>
+          <a href="index.html" id="profileLogout">Logout</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============================================================
+         OVERVIEW
+    ============================================================= -->
+    <section class="dash-section" id="overview">
+
+      <div class="dash-welcome" data-reveal>
+        <div>
+          <p class="dash-welcome-eyebrow">Good to see you again</p>
+          <h1 class="dash-welcome-title">Welcome back, <span>Ali</span></h1>
+          <p class="dash-welcome-sub">Here is what's happening with your garments today.</p>
+        </div>
+        <a href="#tracking" class="btn btn-primary dash-welcome-cta" data-magnetic>
+          <span>Track Current Order</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <div class="dash-stats" data-reveal>
+        <div class="dash-stat-card">
+          <div class="dash-stat-icon dash-stat-icon--total">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v2M4 8h16M4 8v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/></svg>
+          </div>
+          <strong class="dash-stat-value" data-count="32">0</strong>
+          <span class="dash-stat-label">Total Orders</span>
+        </div>
+        <div class="dash-stat-card">
+          <div class="dash-stat-icon dash-stat-icon--done">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <strong class="dash-stat-value" data-count="27">0</strong>
+          <span class="dash-stat-label">Completed</span>
+        </div>
+        <div class="dash-stat-card">
+          <div class="dash-stat-icon dash-stat-icon--pending">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          </div>
+          <strong class="dash-stat-value" data-count="3">0</strong>
+          <span class="dash-stat-label">Pending</span>
+        </div>
+        <div class="dash-stat-card">
+          <div class="dash-stat-icon dash-stat-icon--process">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4l1.5 4M4 4l16 2-2 14-9-1M5.5 8h13"/><circle cx="9" cy="18" r="1.6"/></svg>
+          </div>
+          <strong class="dash-stat-value" data-count="2">0</strong>
+          <span class="dash-stat-label">In Process</span>
+        </div>
+      </div>
+
+      <div class="dash-grid">
+
+        <div class="dash-col-main">
+
+          <!-- Recent Orders -->
+          <section class="panel" id="orders" data-reveal>
+            <div class="panel-head">
+              <h2>Recent Orders</h2>
+              <a href="#orders" class="panel-link">View all</a>
+            </div>
+            <div class="table-scroll">
+              <table class="dash-table" id="ordersTable">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Service</th>
+                    <th>Pickup Date</th>
+                    <th>Delivery Date</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="ordersTableBody">
+                  <!-- populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Order Tracking -->
+          <section class="panel" id="tracking" data-reveal>
+            <div class="panel-head">
+              <h2>Current Order Status</h2>
+              <span class="status-pill status-pill--progress">Ticket RC-04521</span>
+            </div>
+            <p class="panel-note">Dry Cleaning &amp; Pressing · 4 items · Expected today by 6:30 PM</p>
+
+            <ol class="track-timeline" id="trackTimeline">
+              <li class="track-node is-done"><span class="track-dot"></span><span class="track-label">Booked</span></li>
+              <li class="track-node is-done"><span class="track-dot"></span><span class="track-label">Picked Up</span></li>
+              <li class="track-node is-done"><span class="track-dot"></span><span class="track-label">Cleaning</span></li>
+              <li class="track-node is-active"><span class="track-dot"></span><span class="track-label">Ironing</span></li>
+              <li class="track-node"><span class="track-dot"></span><span class="track-label">Quality Check</span></li>
+              <li class="track-node"><span class="track-dot"></span><span class="track-label">Out for Delivery</span></li>
+              <li class="track-node"><span class="track-dot"></span><span class="track-label">Delivered</span></li>
+            </ol>
+
+            <div class="track-driver">
+              <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100&q=80" alt="">
+              <div>
+                <strong>Imran S.</strong>
+                <span>Assigned driver · ETA 6:30 PM</span>
+              </div>
+              <a href="tel:+920000000000" class="track-call-btn" aria-label="Call driver">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </a>
+            </div>
+          </section>
+
+          <!-- Pickup Schedule -->
+          <section class="panel" id="schedule" data-reveal>
+            <div class="panel-head">
+              <h2>Laundry Pickup Schedule</h2>
+              <button type="button" class="panel-link" id="newPickupBtn">+ Schedule new</button>
+            </div>
+            <ul class="schedule-list" id="scheduleList">
+              <li class="schedule-item">
+                <div class="schedule-date">
+                  <strong>09</strong>
+                  <span>Jul</span>
+                </div>
+                <div class="schedule-body">
+                  <h4>Wash &amp; Fold Pickup</h4>
+                  <p>8 – 10 AM · Home Address</p>
+                </div>
+                <span class="status-pill status-pill--pending">Scheduled</span>
+              </li>
+              <li class="schedule-item">
+                <div class="schedule-date">
+                  <strong>12</strong>
+                  <span>Jul</span>
+                </div>
+                <div class="schedule-body">
+                  <h4>Dry Cleaning Pickup</h4>
+                  <p>2 – 4 PM · Office Address</p>
+                </div>
+                <span class="status-pill status-pill--pending">Scheduled</span>
+              </li>
+            </ul>
+          </section>
+
+        </div>
+
+        <div class="dash-col-side">
+
+          <!-- Profile Card -->
+          <section class="panel profile-card" data-reveal>
+            <img class="profile-card-avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80" alt="Ali's profile photo">
+            <h3>Ali Raza</h3>
+            <span class="profile-card-tier">Gold Member</span>
+            <ul class="profile-card-meta">
+              <li>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6l9 7 9-7"/><rect x="3" y="4" width="18" height="16" rx="2"/></svg>
+                ali.raza@example.com
+              </li>
+              <li>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                +92 300 1234567
+              </li>
+            </ul>
+            <button type="button" class="btn btn-outline-dark profile-card-btn" id="editProfileBtn">Edit Profile</button>
+
+            <div class="loyalty-ring" aria-hidden="true">
+              <svg viewBox="0 0 120 120" class="loyalty-ring-svg">
+                <circle cx="60" cy="60" r="52" class="loyalty-ring-track"></circle>
+                <circle cx="60" cy="60" r="52" class="loyalty-ring-fill" id="loyaltyRingFill"></circle>
+              </svg>
+              <div class="loyalty-ring-text">
+                <strong>640</strong>
+                <span>points</span>
+              </div>
+            </div>
+            <p class="loyalty-note"><strong>360 pts</strong> to your next reward — a free Wash &amp; Fold basket.</p>
+          </section>
+
+          <!-- Payment Status -->
+          <section class="panel" id="payments" data-reveal>
+            <div class="panel-head">
+              <h2>Payment Status</h2>
+            </div>
+            <div class="payment-row">
+              <div>
+                <strong>Rs 2,450</strong>
+                <span>Ticket RC-04521 · Dry Cleaning</span>
+              </div>
+              <span class="status-pill status-pill--done">Paid</span>
+            </div>
+            <div class="payment-row">
+              <div>
+                <strong>Rs 900</strong>
+                <span>Ticket RC-04498 · Wash &amp; Fold</span>
+              </div>
+              <span class="status-pill status-pill--pending">Due on Delivery</span>
+            </div>
+            <button type="button" class="btn btn-dark payment-invoice-btn" id="downloadInvoiceBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+              Download Invoice
+            </button>
+          </section>
+
+          <!-- Quick Actions -->
+          <section class="panel" id="quick-actions" data-reveal>
+            <div class="panel-head"><h2>Quick Actions</h2></div>
+            <div class="quick-actions-grid">
+              <button type="button" class="quick-action-btn" data-toast="Redirecting to pickup scheduler…">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
+                Book Pickup
+              </button>
+              <button type="button" class="quick-action-btn" data-toast="Opening live tracker…">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h13l-3-3m3 3l-3 3"/><path d="M16 6h2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-2"/></svg>
+                Track Order
+              </button>
+              <button type="button" class="quick-action-btn" data-toast="Support chat opening…">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2-3 4"/><path d="M12 17h.01"/></svg>
+                Contact Support
+              </button>
+              <button type="button" class="quick-action-btn" id="quickInvoiceBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+                Invoice
+              </button>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+    <span id="toastMsg">Done.</span>
+  </div>
+
+  <script src="js/customer-dashboard.js" defer></script>
+</body>
+</html>

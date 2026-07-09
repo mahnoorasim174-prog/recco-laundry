@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operations Console — RECCO Admin</title>
+  <meta name="description" content="Manage RECCO tickets, drivers, customers and depot performance from the operations console.">
+  <meta name="theme-color" content="#0b0b0c">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin-dashboard.css">
+
+  <link rel="icon" href="images/favicon.png" type="image/png">
+</head>
+<body class="dash-body dash-body--admin">
+
+  <div class="dash-overlay" id="dashOverlay"></div>
+
+  <!-- ============================================================
+       SIDEBAR
+  ============================================================= -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div>
+      <a href="index.html" class="brand dash-brand">
+        <span class="brand-mark"></span>
+        <span class="brand-name">RECCO</span>
+      </a>
+      <span class="dash-brand-tag">Operations</span>
+    </div>
+
+    <nav class="dash-nav" aria-label="Admin navigation">
+      <a href="#overview" class="dash-nav-link is-active" data-panel="overview">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        Dashboard
+      </a>
+      <a href="#orders" class="dash-nav-link" data-panel="orders">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v2M4 8h16M4 8v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/></svg>
+        Orders
+      </a>
+      <a href="#customers" class="dash-nav-link" data-panel="customers">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Customers
+      </a>
+      <a href="#pickups" class="dash-nav-link" data-panel="pickups">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
+        Pickup Requests
+      </a>
+      <a href="#drivers" class="dash-nav-link" data-panel="drivers">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h13l-3-3m3 3l-3 3"/><path d="M16 6h2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-2"/></svg>
+        Drivers
+      </a>
+      <a href="#analytics" class="dash-nav-link" data-panel="analytics">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg>
+        Analytics
+      </a>
+      <a href="#reports" class="dash-nav-link" data-panel="reports">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>
+        Reports
+      </a>
+      <a href="#settings" class="dash-nav-link" data-panel="settings">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Settings
+      </a>
+    </nav>
+
+    <div class="dash-sidebar-footer">
+      <a href="index.html" class="dash-nav-link" id="logoutBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg>
+        Logout
+      </a>
+    </div>
+  </aside>
+
+  <!-- ============================================================
+       MAIN
+  ============================================================= -->
+  <main class="dash-main">
+
+    <!-- Top bar -->
+    <header class="dash-topbar">
+      <button class="dash-mobile-toggle" id="dashToggle" aria-label="Open menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+
+      <div class="dash-search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" placeholder="Search tickets, customers, drivers..." aria-label="Search">
+      </div>
+
+      <div class="dash-topbar-actions">
+        <button class="dash-icon-btn" id="notifToggle" aria-label="Notifications" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+          <span class="dash-icon-dot"></span>
+        </button>
+
+        <div class="dash-notif-panel" id="notifPanel">
+          <div class="dash-notif-head">
+            <h4>Notifications</h4>
+            <span>4 new</span>
+          </div>
+          <ul class="dash-notif-list">
+            <li class="dash-notif-item">
+              <span class="dash-notif-icon dash-notif-icon--warn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+              </span>
+              <div>
+                <p>Ticket RC-04527 delayed by 40 minutes.</p>
+                <span>12 minutes ago</span>
+              </div>
+            </li>
+            <li class="dash-notif-item">
+              <span class="dash-notif-icon dash-notif-icon--success">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              </span>
+              <div>
+                <p>Driver Imran S. arrived at Business Bay.</p>
+                <span>28 minutes ago</span>
+              </div>
+            </li>
+            <li class="dash-notif-item">
+              <span class="dash-notif-icon dash-notif-icon--info">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </span>
+              <div>
+                <p>New message from Sara Qureshi.</p>
+                <span>1 hour ago</span>
+              </div>
+            </li>
+            <li class="dash-notif-item">
+              <span class="dash-notif-icon dash-notif-icon--success">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>
+              </span>
+              <div>
+                <p>Payment received for ticket RC-04524.</p>
+                <span>2 hours ago</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <button class="dash-profile-btn" id="profileToggle" aria-label="Admin profile menu" aria-expanded="false">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" alt="">
+          <span class="dash-profile-name">Farhan K.</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+
+        <div class="dash-profile-menu" id="profileMenu">
+          <div class="dash-profile-menu-head">
+            <strong>Farhan Khan</strong>
+            <span>Depot Manager</span>
+          </div>
+          <a href="#settings">Account Settings</a>
+          <a href="#reports">Reports</a>
+          <a href="index.html" id="profileLogout">Logout</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============================================================
+         OVERVIEW
+    ============================================================= -->
+    <section class="dash-section" id="overview">
+
+      <div class="dash-welcome" data-reveal>
+        <div>
+          <p class="dash-welcome-eyebrow">Tuesday, 7 July 2026</p>
+          <h1 class="dash-welcome-title">Depot Overview</h1>
+          <p class="dash-welcome-sub">46 tickets are moving through the floor today across 3 active drivers.</p>
+        </div>
+        <button type="button" class="btn btn-primary dash-welcome-cta" id="addOrderBtn" data-magnetic>
+          <span>+ Add Order</span>
+        </button>
+      </div>
+
+      <div class="dash-stats" data-reveal>
+        <div class="dash-stat-card dash-stat-card--indigo">
+          <div class="dash-stat-top">
+            <div class="dash-stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v2M4 8h16M4 8v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/></svg></div>
+            <span class="dash-stat-delta">+12%</span>
+          </div>
+          <strong class="dash-stat-value" data-count="46">0</strong>
+          <span class="dash-stat-label">Today's Orders</span>
+        </div>
+
+        <div class="dash-stat-card dash-stat-card--amber">
+          <div class="dash-stat-top">
+            <div class="dash-stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+            <span class="dash-stat-delta">6 open</span>
+          </div>
+          <strong class="dash-stat-value" data-count="14">0</strong>
+          <span class="dash-stat-label">Pending Orders</span>
+        </div>
+
+        <div class="dash-stat-card dash-stat-card--green">
+          <div class="dash-stat-top">
+            <div class="dash-stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <span class="dash-stat-delta">98.4%</span>
+          </div>
+          <strong class="dash-stat-value" data-count="32">0</strong>
+          <span class="dash-stat-label">Completed Orders</span>
+        </div>
+
+        <div class="dash-stat-card dash-stat-card--dark">
+          <div class="dash-stat-top">
+            <div class="dash-stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H7"/></svg></div>
+            <span class="dash-stat-delta">+8%</span>
+          </div>
+          <strong class="dash-stat-value" data-count="187400" data-prefix="Rs " data-format="thousands">Rs 0</strong>
+          <span class="dash-stat-label">Revenue This Week</span>
+        </div>
+
+        <div class="dash-stat-card dash-stat-card--rose">
+          <div class="dash-stat-top">
+            <div class="dash-stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <span class="dash-stat-delta">+21</span>
+          </div>
+          <strong class="dash-stat-value" data-count="3214">0</strong>
+          <span class="dash-stat-label">Active Customers</span>
+        </div>
+      </div>
+
+      <div class="dash-grid">
+
+        <div class="dash-col-main">
+
+          <!-- Analytics -->
+          <section class="panel" id="analytics" data-reveal>
+            <div class="panel-head">
+              <h2>Revenue Analytics</h2>
+              <div class="chart-tabs">
+                <button type="button" class="chart-tab is-active" data-chart="weekly">Weekly Orders</button>
+                <button type="button" class="chart-tab" data-chart="monthly">Monthly Revenue</button>
+                <button type="button" class="chart-tab" data-chart="growth">Customer Growth</button>
+              </div>
+            </div>
+            <div class="chart-bars" id="chartBars">
+              <!-- populated by JS -->
+            </div>
+          </section>
+
+          <!-- Orders management table -->
+          <section class="panel" id="orders" data-reveal>
+            <div class="panel-head">
+              <h2>Orders Management</h2>
+              <div class="filter-tabs" id="orderFilterTabs">
+                <button class="is-active" data-filter="all">All</button>
+                <button data-filter="pending">Pending</button>
+                <button data-filter="progress">Processing</button>
+                <button data-filter="ready">Out for Delivery</button>
+                <button data-filter="done">Delivered</button>
+                <button data-filter="cancelled">Cancelled</button>
+              </div>
+            </div>
+            <div class="table-scroll">
+              <table class="dash-table" id="ordersTable">
+                <thead>
+                  <tr>
+                    <th>Ticket</th>
+                    <th>Customer</th>
+                    <th>Pickup Address</th>
+                    <th>Status</th>
+                    <th>Driver</th>
+                    <th>Payment</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="ordersTableBody">
+                  <!-- populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Laundry queue -->
+          <section class="panel" id="queue" data-reveal>
+            <div class="panel-head">
+              <h2>Laundry Queue</h2>
+              <span class="panel-note">Live floor status</span>
+            </div>
+            <div class="queue-grid" id="queueGrid">
+              <!-- populated by JS -->
+            </div>
+          </section>
+
+        </div>
+
+        <div class="dash-col-side">
+
+          <!-- Recent activity -->
+          <section class="panel" id="activity" data-reveal>
+            <div class="panel-head"><h2>Recent Activity</h2></div>
+            <ol class="activity-timeline" id="activityTimeline">
+              <!-- populated by JS -->
+            </ol>
+          </section>
+
+          <!-- Pickup schedule -->
+          <section class="panel" id="pickups" data-reveal>
+            <div class="panel-head">
+              <h2>Pickup Requests</h2>
+              <a href="#pickups" class="panel-link">View all</a>
+            </div>
+            <ul class="schedule-list" id="pickupList">
+              <!-- populated by JS -->
+            </ul>
+          </section>
+
+          <!-- Staff overview -->
+          <section class="panel" id="drivers" data-reveal>
+            <div class="panel-head">
+              <h2>Staff Overview</h2>
+              <button type="button" class="panel-link" id="assignDriverBtn">Assign</button>
+            </div>
+            <div id="staffList">
+              <!-- populated by JS -->
+            </div>
+          </section>
+
+          <!-- Customers -->
+          <section class="panel" id="customers" data-reveal>
+            <div class="panel-head">
+              <h2>Top Customers</h2>
+              <a href="#customers" class="panel-link">View all</a>
+            </div>
+            <div id="customerList">
+              <!-- populated by JS -->
+            </div>
+          </section>
+
+          <!-- Quick actions -->
+          <section class="panel" id="quick-actions" data-reveal>
+            <div class="panel-head"><h2>Quick Actions</h2></div>
+            <div class="quick-actions-grid">
+              <button type="button" class="quick-action-btn" id="qaAddOrder">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>
+                Add Order
+              </button>
+              <button type="button" class="quick-action-btn" id="qaAssignDriver">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h13l-3-3m3 3l-3 3"/><path d="M16 6h2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-2"/></svg>
+                Assign Driver
+              </button>
+              <button type="button" class="quick-action-btn" id="qaGenerateReport">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg>
+                Generate Report
+              </button>
+              <button type="button" class="quick-action-btn" id="qaPrintInvoice">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                Print Invoice
+              </button>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+    <span id="toastMsg">Done.</span>
+  </div>
+
+  <script src="js/admin-dashboard.js" defer></script>
+</body>
+</html>

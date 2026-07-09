@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Sign In — RECCO Operations Console</title>
+  <meta name="description" content="Restricted sign in for RECCO staff. Manage tickets, drivers and depot operations from the console.">
+  <meta name="theme-color" content="#0b0b0c">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/login.css">
+
+  <link rel="icon" href="images/favicon.png" type="image/png">
+</head>
+<body class="auth-body auth-body--admin">
+
+  <a href="index.html" class="auth-back auth-back--dark" data-magnetic>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+    Back to Home
+  </a>
+
+  <div class="auth-shell auth-shell--admin">
+
+    <!-- ============================================================
+         LEFT — Depot photography, fully dark treatment
+    ============================================================= -->
+    <div class="auth-visual auth-visual--admin" aria-hidden="true">
+      <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg" alt="Admin Panel">
+      <div class="auth-visual-scrim auth-visual-scrim--admin"></div>
+
+      <div class="auth-visual-glow auth-visual-glow--1"></div>
+      <div class="auth-visual-glow auth-visual-glow--2"></div>
+
+      <div class="auth-ticket-card">
+        <span class="auth-ticket-label">Depot Status</span>
+        <strong class="auth-ticket-value">Operational</strong>
+        <span class="auth-ticket-status">
+          <span class="auth-ticket-dot"></span>
+          46 tickets moving today
+        </span>
+      </div>
+
+      <div class="auth-visual-copy">
+        <a href="index.html" class="brand">
+          <span class="brand-mark"></span>
+          <span class="brand-name">RECCO</span>
+        </a>
+        <h2>The depot floor, in one dashboard.</h2>
+        <p>Manage incoming tickets, driver routes and daily throughput from a single operations console.</p>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         RIGHT — Dark glass admin card
+    ============================================================= -->
+    <div class="auth-panel auth-panel--admin">
+      <div class="auth-card auth-card--admin" id="authCard">
+
+        <div class="auth-admin-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6l8-4z"/><path d="M9.5 12l1.8 1.8L15 10"/></svg>
+        </div>
+
+        <p class="eyebrow auth-eyebrow auth-eyebrow--admin">Operations Console</p>
+        <h1 class="auth-title auth-title--admin">Admin Login</h1>
+        <p class="auth-subtitle auth-subtitle--admin">Restricted to RECCO staff. Contact your manager if you need access.</p>
+
+        <div class="auth-alert" id="authAlert" role="alert" aria-live="assertive">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+          <span id="authAlertMsg">Invalid admin email or password. Please try again.</span>
+        </div>
+
+        <form class="auth-form" id="adminLoginForm" novalidate>
+
+          <div class="field field--admin" id="emailField">
+            <label class="field-label field-label--admin" for="adminEmail">Admin Email</label>
+            <div class="field-input field-input--admin">
+              <svg class="field-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="12" r="2.2"/><path d="M14 10h4M14 14h3"/></svg>
+              <input type="text" id="adminEmail" name="adminEmail" placeholder="you@recco.com" autocomplete="username" required>
+            </div>
+            <span class="field-error" id="adminEmailError">Please enter your admin email or ID.</span>
+          </div>
+
+          <div class="field field--admin" id="passwordField">
+            <label class="field-label field-label--admin" for="adminPassword">Password</label>
+            <div class="field-input field-input--admin">
+              <svg class="field-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+              <input type="password" id="adminPassword" name="adminPassword" placeholder="Enter your password" autocomplete="current-password" required>
+              <button type="button" class="field-toggle field-toggle--admin" data-toggle-target="adminPassword" aria-label="Show password">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+            <span class="field-error" id="adminPasswordError">Please enter your password.</span>
+          </div>
+
+          <div class="auth-form-row">
+            <label class="auth-checkbox auth-checkbox--admin">
+              <input type="checkbox" id="adminRemember" name="adminRemember">
+              <span class="auth-checkbox-box"></span>
+              Keep me signed in
+            </label>
+            <a href="#" class="auth-forgot auth-forgot--admin" id="adminForgotLink">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary auth-submit" id="adminSubmitBtn" data-magnetic>
+            <span class="auth-submit-label">Sign In to Console</span>
+            <span class="auth-spinner" aria-hidden="true"></span>
+          </button>
+
+          <!-- <p class="auth-hint auth-hint--admin">Demo access — username <strong>admin123</strong> / password <strong>recco123</strong></p> -->
+
+        </form>
+
+        <p class="auth-switch auth-switch--admin">
+          Looking for your orders instead?
+          <a href="customer-login.html">Go to Customer Login</a>
+        </p>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+    <span id="toastMsg">Signed in successfully.</span>
+  </div>
+
+  <script src="js/login.js" data-mode="admin" defer></script>
+</body>
+</html>

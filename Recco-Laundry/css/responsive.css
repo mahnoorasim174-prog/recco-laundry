@@ -1,0 +1,776 @@
+/* ==========================================================================
+   RECCO — Responsive CSS
+   Breakpoints:
+     @media (max-width: 992px)  — Tablet landscape / small desktop
+     @media (max-width: 768px)  — Tablet portrait
+     @media (max-width: 480px)  — Mobile
+   IMPORTANT:
+   - Desktop styles in style.css are NOT changed.
+   - Colors, fonts, animations stay identical.
+   - Hover effects on desktop stay. On touch devices replaced with
+     scroll-reveal (.in-view), fade-up, soft-zoom, active-state.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   TOUCH — replace hover with :active + tap-friendly sizes
+   Applied globally on touch screens
+   ========================================================================== */
+
+@media (hover: none) and (pointer: coarse) {
+
+  /* Buttons — tap feedback instead of hover lift */
+  .btn:active {
+    transform: scale(0.96) translateY(0) !important;
+  }
+
+  .btn-primary:active {
+    box-shadow: var(--shadow-btn-primary);
+  }
+
+  .btn-dark:active {
+    box-shadow: var(--shadow-btn-dark);
+  }
+
+  /* Nav links — underline on tap */
+  .main-nav a:active::after { width: 100%; }
+
+  /* Service card — tap soft zoom instead of translateY hover */
+  .service-card:active {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  /* Arrow spin on tap */
+  .service-card:active .card-arrow {
+    transform: rotate(45deg);
+    background: var(--yellow);
+    border-color: var(--yellow);
+  }
+  .service-card:active .card-arrow svg { stroke: var(--ink); }
+
+  /* Feature image zoom on tap */
+  .service-card.feature:active .feature-media img {
+    transform: scale(1.06);
+    opacity: .4;
+  }
+
+  /* Quote card tap */
+  .quote-card:active { transform: translateY(-4px); }
+
+  /* Garment tag tap */
+  .garment-tag:active { transform: rotate(0deg) translateY(-4px) !important; }
+
+  /* Footer social tap */
+  .footer-social a:active {
+    background: var(--yellow);
+    border-color: var(--yellow);
+    color: var(--ink);
+  }
+
+  /* Quote nav tap */
+  .quote-nav button:active {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--white);
+  }
+
+  /* Magnetic effect — disable on touch (JS won't track pointer anyway) */
+  .magnetic { will-change: auto; }
+
+  /* Hero play tap */
+  .hero-play:active .hero-play-icon {
+    background: rgba(255,255,255,.12);
+  }
+
+  /* Outline dark btn tap */
+  .btn-outline-dark:active {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--white);
+  }
+
+  /* Ghost btn tap */
+  .btn-ghost:active {
+    background: rgba(255,255,255,.1);
+    border-color: rgba(255,255,255,.6);
+  }
+
+  /* Mobile drawer link — tap state instead of hover */
+  .mobile-drawer a:active {
+    color: var(--yellow);
+    padding-left: 8px;
+  }
+}
+
+
+/* ==========================================================================
+   992px — Tablet Landscape
+   ========================================================================== */
+
+@media (max-width: 992px) {
+
+  /* ── Variables adjustment ── */
+  :root {
+    --space-section: clamp(64px, 9vw, 100px);
+    --gutter: clamp(20px, 4vw, 40px);
+  }
+
+  /* ── Header ── */
+  .site-header { padding: 20px 0; }
+
+  .site-header.is-solid { padding: 12px 0; }
+
+  /* Hide desktop nav, show hamburger */
+  .main-nav ul { display: none; }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  /* ── Hamburger → Cross animation ──
+     script.js sets aria-expanded="true/false" on #navToggle when the
+     mobile drawer opens/closes — used here as the animation hook so
+     script.js does not need to be touched. */
+  
+.nav-toggle span {
+  transform-origin: center;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+.nav-toggle span {
+  transform-origin: center;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+  /* ── Hero ── */
+  /* Give hero top padding so fixed header doesn't overlap */
+  .hero { min-height: 100svh; }
+
+  .hero-content .container {
+    grid-template-columns: 1fr;
+    padding-top: 110px;
+    gap: 32px;
+  }
+
+  .hero h1 { font-size: clamp(40px, 7vw, 68px); }
+
+  .hero-sub { font-size: 16px; max-width: 52ch; }
+
+  .hero-card {
+    justify-self: start;
+    max-width: 340px;
+  }
+
+  .hero-scroll { display: none; }
+
+  /* ── Services ── */
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .service-card.feature {
+    grid-column: span 2;
+    min-height: 380px;
+  }
+
+  .service-card.small {
+    grid-column: span 1;
+    min-height: 200px;
+  }
+
+  /* ── Process ── */
+  .ticket-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  /* ── Pricing ── */
+  .tag-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 24px;
+  }
+
+  /* Reset tilts on tablet so cards look cleaner stacked */
+  .garment-tag,
+  .tag-row .garment-tag:nth-child(2),
+  .tag-row .garment-tag:nth-child(3) {
+    transform: rotate(0deg);
+  }
+
+  /* ── Stats ── */
+  .stats { min-height: auto; padding: clamp(60px, 8vw, 100px) 0; }
+  .stats-grid { grid-template-columns: 1fr; gap: 36px; }
+  .stats-copy h2 { font-size: clamp(26px, 4.5vw, 40px); }
+
+  /* ── Testimonials ── */
+  .quote-card {
+    flex: 0 0 clamp(260px, 60vw, 360px);
+  }
+
+  /* ── Footer ── */
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+
+  /* ── CTA Banner ── */
+  .cta-banner { margin: 0 var(--gutter); padding: clamp(48px, 7vw, 80px) clamp(24px, 5vw, 56px); }
+
+  .cta-grid {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+  }
+
+  .cta-grid h2 { font-size: clamp(26px, 4vw, 40px); max-width: 100%; }
+
+  /* ── Section head ── */
+  .section-head { max-width: 100%; }
+  .section-head h2 { font-size: clamp(28px, 4.5vw, 44px); }
+}
+
+
+/* ==========================================================================
+   768px — Tablet Portrait
+   ========================================================================== */
+
+@media (max-width: 768px) {
+
+  /* ── Variables ── */
+  :root {
+    --space-section: clamp(56px, 10vw, 88px);
+    --gutter: 20px;
+  }
+
+  /* ── Header ── */
+  .site-header { padding: 16px 0; }
+  .site-header.is-solid { padding: 10px 0; }
+
+  .brand { font-size: 19px; }
+
+  /* Hide login button in header on tablet portrait — keep hamburger */
+  .header-actions .btn-primary { display: none; }
+
+  /* ── Mobile Drawer — professional typography + staggered entrance ── */
+  .mobile-drawer ul { gap: 4px; }
+
+  .mobile-drawer a {
+    display: block;
+    font-size: 25px;
+    letter-spacing: -0.01em;
+    padding: 13px 4px;
+    color: rgba(255, 255, 255, .92);
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+    transition: color .3s var(--ease-soft), padding-left .3s var(--ease-out);
+  }
+
+  .mobile-drawer li:last-child a { border-bottom: none; }
+
+  /* Staggered fade-in when the drawer opens */
+  .mobile-drawer li {
+    opacity: 0;
+    transform: translateX(-14px);
+    transition: opacity .4s var(--ease-out), transform .4s var(--ease-out);
+  }
+
+  .mobile-drawer.is-open li { opacity: 1; transform: translateX(0); }
+
+  .mobile-drawer.is-open li:nth-child(1) { transition-delay: .05s; }
+  .mobile-drawer.is-open li:nth-child(2) { transition-delay: .1s; }
+  .mobile-drawer.is-open li:nth-child(3) { transition-delay: .15s; }
+  .mobile-drawer.is-open li:nth-child(4) { transition-delay: .2s; }
+  .mobile-drawer.is-open li:nth-child(5) { transition-delay: .25s; }
+  .mobile-drawer.is-open li:nth-child(6) { transition-delay: .3s; }
+
+  .mobile-drawer .drawer-actions {
+    margin-top: 30px;
+    gap: 12px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .4s var(--ease-out) .3s, transform .4s var(--ease-out) .3s;
+  }
+
+  .mobile-drawer.is-open .drawer-actions {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobile-drawer .drawer-actions .btn { width: 100%; justify-content: center; }
+
+  .mobile-drawer .drawer-actions {
+  margin-top: 30px;
+  gap: 16px;              /* zyada gap dono buttons ke darmiyan */
+}
+
+.mobile-drawer .drawer-actions .btn {
+  width: 100%;
+  justify-content: center;
+  padding: 13px 20px;      /* pehle 16px 30px tha — ab chhota */
+  font-size: 12px;         /* pehle 13.5px tha — ab thora chhota */
+  letter-spacing: .04em;
+}
+
+  /* ── Hero ── */
+  .hero { min-height: 100svh; align-items: flex-end; }
+
+  .hero-content { padding-bottom: var(--space-lg); }
+
+  .hero-content .container {
+    grid-template-columns: 1fr;
+    padding-top: 100px;
+    gap: 28px;
+  }
+
+  .hero h1 { font-size: clamp(36px, 9vw, 56px); line-height: 1.02; }
+
+  .hero-eyebrow { font-size: 11.5px; margin-bottom: 16px; }
+
+  .hero-sub { font-size: 15.5px; max-width: 46ch; margin-top: 18px; }
+
+  .hero-actions {
+    gap: 14px;
+    margin-top: 26px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-actions .btn { width: 100%; justify-content: center; }
+
+  /* Hero card stays visible — resized instead of hidden */
+  .hero-card {
+    justify-self: stretch;
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .hero-card p { font-size: 13.5px; }
+
+  /* ── Services ── */
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .service-card.feature {
+    grid-column: span 1;
+    min-height: 300px;
+  }
+
+  .service-card.small {
+    grid-column: span 1;
+    min-height: 180px;
+  }
+
+  .service-card { padding: 26px; }
+  .service-card.feature h3 { font-size: 28px; }
+  .service-card h3 { font-size: 22px; }
+
+  /* ── Process ── */
+  .ticket-row { grid-template-columns: 1fr; gap: 14px; }
+
+  .ticket {
+    min-height: auto;
+    padding: 26px 22px;
+  }
+
+  .ticket::before, .ticket::after { display: none; }
+
+  /* ── Pricing ── */
+  .tag-row {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+    margin-inline: auto;
+    gap: 24px;
+  }
+
+  .garment-tag,
+  .tag-row .garment-tag:nth-child(2),
+  .tag-row .garment-tag:nth-child(3) {
+    transform: rotate(0deg);
+  }
+
+  /* ── Stats ── */
+  .stats { padding: clamp(48px, 8vw, 80px) 0; }
+
+  .stats-grid { grid-template-columns: 1fr; gap: 28px; }
+
+  .stats-cards { grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  .stat-card { padding: 20px 16px; }
+  .stat-card strong { font-size: 32px; }
+
+  .stats-copy h2 { font-size: clamp(24px, 5.5vw, 36px); }
+
+  /* ── Testimonials ── */
+  .quote-card {
+    flex: 0 0 clamp(240px, 78vw, 340px);
+    padding: 26px;
+  }
+
+  .quote-track { gap: 16px; }
+
+  /* ── CTA Banner ── */
+  .cta-banner {
+    margin: 0 var(--gutter);
+    padding: clamp(40px, 8vw, 72px) clamp(20px, 5vw, 44px);
+    border-radius: var(--radius-lg);
+  }
+
+  .cta-grid { flex-direction: column; align-items: flex-start; gap: 22px; }
+
+  .cta-grid h2 { font-size: clamp(24px, 5vw, 36px); }
+
+  .cta-grid .cta-actions { flex-direction: column; width: 100%; }
+
+  .cta-grid .cta-actions .btn { width: 100%; justify-content: center; }
+
+  /* ── Footer ── */
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 20px;
+    padding-bottom: 40px;
+  }
+
+  .footer-note {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .footer-legal { gap: 16px; flex-wrap: wrap; }
+
+  /* ── Section head ── */
+  .section-head { max-width: 100%; margin-bottom: clamp(28px, 5vw, 48px); }
+  .section-head h2 { font-size: clamp(26px, 6vw, 38px); }
+  .section-head p { font-size: 15.5px; }
+
+  /* ── Eyebrow ── */
+  .eyebrow { font-size: 11.5px; }
+
+  /* ── Marquee ── */
+  .marquee-track span { font-size: 13.5px; gap: 12px; }
+  .marquee-track { gap: 48px; }
+}
+
+
+/* ==========================================================================
+   480px — Mobile
+   ========================================================================== */
+
+@media (max-width: 480px) {
+
+  /* ── Variables ── */
+  :root {
+    --space-section: clamp(48px, 12vw, 72px);
+    --gutter: 16px;
+    --space-lg: 32px;
+    --space-md: 20px;
+  }
+
+  /* ── Header ── */
+  .site-header { padding: 14px 0; }
+  .site-header.is-solid { padding: 9px 0; }
+
+  .brand { font-size: 17px; gap: 7px; }
+
+  .nav-toggle { width: 22px; gap: 4px; }
+
+  /* ── Mobile Drawer ── */
+  .mobile-drawer { padding: 28px var(--gutter); }
+
+  .mobile-drawer a {
+    font-size: 21px;
+    padding: 12px 4px;
+  }
+
+  .mobile-drawer .drawer-actions { margin-top: 26px; }
+
+  .mobile-drawer .drawer-actions {
+  margin-top: 24px;
+  gap: 14px;
+}
+
+.mobile-drawer .drawer-actions .btn {
+  padding: 12px 18px;
+  font-size: 11.5px;
+}
+
+  /* ── Hero ── */
+  .hero { min-height: 100svh; }
+
+  .hero-content .container {
+    grid-template-columns: 1fr;
+    padding-top: 88px;
+    gap: 24px;
+  }
+
+  .hero h1 { font-size: clamp(32px, 10.5vw, 48px); line-height: 1.05; }
+
+  .hero-eyebrow { font-size: 10.5px; letter-spacing: .18em; margin-bottom: 14px; }
+
+  .hero-sub { font-size: 14.5px; line-height: 1.6; margin-top: 14px; }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 22px;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 15px 20px;
+    font-size: 13px;
+  }
+
+  .hero-play { font-size: 12.5px; }
+  .hero-play-icon { width: 40px; height: 40px; }
+
+  /* Hero card — compact but still visible */
+  .hero-card {
+    padding: 18px;
+    border-radius: var(--radius-md);
+  }
+
+  .hero-card .rating { margin-bottom: 10px; font-size: 13px; }
+  .hero-card p { font-size: 13px; }
+  .hero-card .who img { width: 34px; height: 34px; }
+  .hero-card .who strong { font-size: 12.5px; }
+  .hero-card .who span { font-size: 12px; }
+
+  .hero-content { padding-bottom: var(--space-md); }
+
+  /* ── Marquee ── */
+  .marquee { padding: 18px 0; }
+  .marquee-track span { font-size: 12.5px; gap: 10px; }
+  .marquee-track { gap: 38px; }
+
+  /* ── Services ── */
+  .services { padding: var(--space-section) 0 clamp(48px, 8vw, 80px); }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .service-card { padding: 22px 20px; border-radius: var(--radius-md); }
+
+  .service-card.feature {
+    grid-column: span 1;
+    min-height: 260px;
+  }
+
+  .service-card.feature h3 { font-size: 24px; }
+  .service-card h3 { font-size: 20px; }
+  .service-card p { font-size: 13.5px; }
+
+  .service-card .card-arrow {
+    width: 34px; height: 34px;
+    top: 20px; right: 20px;
+  }
+
+  /* ── Process ── */
+  .process { padding: var(--space-section) 0; }
+  .ticket-row { grid-template-columns: 1fr; gap: 12px; }
+
+  .ticket {
+    padding: 22px 18px 26px;
+    min-height: auto;
+    border-radius: var(--radius-md);
+  }
+
+  .ticket::before, .ticket::after { display: none; }
+  .ticket .stub-no { font-size: 36px; }
+  .ticket h4 { font-size: 17px; }
+  .ticket p { font-size: 13px; }
+
+  /* ── Pricing ── */
+  .pricing { padding: var(--space-section) 0; }
+
+  .tag-row {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    gap: 20px;
+  }
+
+  .garment-tag,
+  .tag-row .garment-tag:nth-child(2),
+  .tag-row .garment-tag:nth-child(3) {
+    transform: rotate(0deg);
+  }
+
+  .garment-tag { padding: 32px 22px 28px; border-radius: 4px 14px 14px 4px; }
+
+  .garment-tag .tag-price { font-size: 36px; }
+
+  .garment-tag ul { gap: 10px; margin-top: 16px; }
+  .garment-tag li { font-size: 13.5px; }
+
+  .garment-tag .btn { margin-top: 20px; width: 100%; justify-content: center; }
+
+  /* ── Stats ── */
+  .stats { padding: var(--space-section) 0; min-height: auto; }
+
+  .stats-grid { grid-template-columns: 1fr; gap: 24px; }
+
+  .stats-cards {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .stat-card { padding: 18px 14px; border-radius: var(--radius-md); }
+  .stat-card strong { font-size: 28px; }
+  .stat-card span { font-size: 12px; }
+
+  .stats-copy h2 { font-size: clamp(22px, 7vw, 32px); }
+  .stats-copy p { font-size: 14.5px; margin-top: 12px; }
+
+  /* ── Testimonials ── */
+  .testimonials { padding: var(--space-section) 0; }
+
+  .quote-card {
+    flex: 0 0 clamp(230px, 84vw, 320px);
+    padding: 22px 20px;
+    border-radius: var(--radius-md);
+  }
+
+  .quote-card p.quote { font-size: 14.5px; margin-top: 14px; }
+  .quote-card .who { margin-top: 16px; }
+  .quote-track { gap: 12px; padding-bottom: 6px; }
+  .quote-nav { margin-top: 20px; }
+  .quote-nav button { width: 40px; height: 40px; }
+
+  /* ── CTA Banner ── */
+  .cta-banner {
+    margin: 0 var(--gutter);
+    padding: clamp(36px, 10vw, 60px) var(--gutter);
+    border-radius: var(--radius-md);
+  }
+
+  .cta-grid { gap: 18px; flex-direction: column; align-items: flex-start; }
+
+  .cta-grid h2 { font-size: clamp(22px, 6.5vw, 32px); }
+
+  .cta-grid .cta-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .cta-grid .cta-actions .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 15px 20px;
+  }
+
+  /* ── Footer ── */
+  .site-footer { padding-top: clamp(48px, 8vw, 72px); }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-bottom: 32px;
+  }
+
+  .footer-brand p { max-width: 100%; font-size: 13.5px; }
+
+  .footer-social { gap: 10px; }
+  .footer-social a { width: 36px; height: 36px; }
+
+  .footer-col h5 { margin-bottom: 14px; }
+  .footer-col ul { gap: 11px; }
+  .footer-col a, .footer-col li { font-size: 13.5px; }
+
+  .footer-col .hours-row { font-size: 13px; }
+
+  .footer-newsletter form { margin-top: 12px; }
+  .footer-newsletter input { font-size: 13.5px; padding: 10px 0; }
+
+  .footer-note {
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 0 24px;
+    font-size: 12px;
+  }
+
+  .footer-legal { gap: 14px; flex-wrap: wrap; font-size: 12px; }
+
+  /* ── Section head ── */
+  .section-head { max-width: 100%; margin-bottom: clamp(24px, 6vw, 40px); }
+  .section-head h2 { font-size: clamp(24px, 7.5vw, 34px); margin-top: 10px; }
+  .section-head p { font-size: 14.5px; margin-top: 12px; }
+
+  .section-head.center p { max-width: 100%; }
+
+  /* ── Eyebrow ── */
+  .eyebrow { font-size: 10.5px; letter-spacing: .18em; gap: 8px; }
+  .eyebrow::before { width: 18px; }
+
+  /* ── Buttons (base) ── */
+  .btn { padding: 14px 22px; font-size: 13px; }
+
+  /* ── Scroll reveal — slightly faster on mobile ── */
+  [data-reveal] {
+    transform: translateY(24px);
+    transition: opacity .7s var(--ease-out), transform .7s var(--ease-out);
+  }
+}
+
+
+/* ==========================================================================
+   Extra — prevent horizontal scroll globally on all breakpoints
+   ========================================================================== */
+
+@media (max-width: 992px) {
+  html, body { overflow-x: hidden; max-width: 100%; }
+
+  /* Ensure no child breaks layout */
+  .container { overflow-x: clip; }
+
+  /* Marquee — keep internal overflow intentional */
+  .marquee { overflow: hidden; }
+  .quote-track { overflow-x: auto; }
+}
+
+
+/* ==========================================================================
+   Safe-area support — notched phones (iPhone)
+   ========================================================================== */
+
+@media (max-width: 480px) {
+  .site-header { padding-top: max(14px, env(safe-area-inset-top)); }
+
+  .hero-content .container {
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+  }
+
+  .site-footer {
+    padding-bottom: max(0px, env(safe-area-inset-bottom));
+  }
+}

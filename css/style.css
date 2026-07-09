@@ -729,9 +729,15 @@ section { position: relative; }
 
 .service-card:hover .card-arrow svg { stroke: var(--ink); }
 
-@media (max-width: 980px) {
-  .services-grid { grid-template-columns: repeat(2, 1fr); }
-  .service-card.feature, .service-card.small { grid-column: span 2; }
+@media (max-width:980px){
+.services-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.service-card.feature,
+.service-card.small{
+grid-column:span 2;
+}
 }
 
 /* ==========================================================================

@@ -161,7 +161,7 @@ p { margin: 0; }
   margin-top: 18px;
   color: var(--ash);
   font-size: 16.5px;
-  max-width: 46ch;
+  max-width: 70ch;
 }
 
 .section-head.center { margin-inline: auto; text-align: center; }
